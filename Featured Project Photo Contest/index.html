@@ -1,3 +1,6 @@
+<div style="background-image: url(' http://www2.archsystems.com/l/67312/2018-01-19/bbg6k5/67312/171420/bg_min.jpg'); background-size: 100% auto;width: 100%; min-height: 600px;background-repeat: no-repeat; background-position: center center;"></div>
+<img alt="" border="0" src="http://www2.archsystems.com/l/67312/2018-01-19/bbg3nt/67312/171412/footer.jpg" style="width: 100%; height: auto; border-width: 0px; border-style: solid;"
+/>
 <!-- Below Form -->
 <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
 <script src="http://www2.archsystems.com/l/67312/2018-01-18/bbf6h3/67312/171294/dropzone.js"></script>
@@ -6,12 +9,16 @@
   var maxBlob = 8 * 1000 * 1000;
   function uploadFiles(e) {
     e.preventDefault();
+    var myDropzone = Dropzone.forElement("#file-upload");
+    if (myDropzone.files.length === 0) {
+      return false;
+    }
     var ACCESS_TOKEN = "E2kOOrj3PAoAAAAAAAAV3iglJznk6_o8_PNYC16bHyIWLXCrPQxQXZLB-Nt7SfcJ";
     var dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
     var bar = new ProgressBar.Line("#container", {
       strokeWidth: 4,
       easing: 'easeInOut',
-      color: "#FFEA82",
+      color: "#BF3060",
       trailColor: "#eee",
       trailWidth: 1,
       svgStyle: { width: "100%", height: "100%" },
@@ -26,48 +33,58 @@
           transform: null
         }
       },
-      from: { color: "#FFEA82" },
-      to: { color: "#ED6A5A" },
       step: (state, bar) => {
         bar.setText(Math.round(bar.value() * 100) + "%")
       }
     })
-    var body = document.getElementsByTagName("body");
-    var thankYou = document.createElement("P");
-    var thankYouText = document.createTextNode("Thanks for submitting your photo - good luck!");
-    thankYou.appendChild(thankYouText);
-    body[0].appendChild(thankYou);
-    var form = document.getElementsByTagName("form");
-    form[0].style.display = "none";
-    var myDropzone = Dropzone.forElement("#file-upload");
+    var progressContainer = document.getElementById("container");
+    var submit = document.getElementsByClassName("submit")[0];
+    var loading = document.createElement("P");
+    var loadingText = document.createTextNode("Please wait while we upload your submission");
+    loading.setAttribute("style", "text-align: center; margin-bottom: 20px;")
+    loading.appendChild(loadingText);
+    submit.style.display = "none";
+    var formElementsContainer = document.getElementById("form-elements");
     var firstName = document.getElementById("67312_132962pi_67312_132962").value;
     var lastName = document.getElementById("67312_132964pi_67312_132964").value;
+    formElementsContainer.innerHTML = "";
+    formElementsContainer.appendChild(progressContainer);
+    formElementsContainer.appendChild(loading)
     console.log("Upload files: %0", myDropzone.files);
     var workItems = [];
     var workItemsSize = 0;
-    myDropzone.files.forEach(function(file){
+    myDropzone.files.forEach(function (file) {
       if (file.size < maxBlob) {
-        workItems.push({file: file, chunk: false, size: file.size});
+        workItems.push({ file: file, chunk: false, size: file.size });
         workItemsSize += file.size;
       } else {
         var offset = 0;
         while (offset < file.size) {
           var chunkSize = Math.min(maxBlob, file.size - offset);
-          workItems.push({file: file, chunk: true, offset: offset, end: offset + chunkSize, size: chunkSize});
+          workItems.push({ file: file, chunk: true, offset: offset, end: offset + chunkSize, size: chunkSize });
           workItemsSize += chunkSize;
           offset += chunkSize;
         }
-        workItems[workItems.length-1].close = true;
+        workItems[workItems.length - 1].close = true;
       }
     });
     console.log("Workitems:", workItems);
     if (workItems.length === 1) {
       var file = workItems[0].file;
       console.log("Uploading file: " + file.name);
+      bar.animate(1.0);
       dbx.filesUpload({ path: '/' + firstName + ' ' + lastName + '/' + file.name, contents: file })
         .then(function (response) {
           console.log(response);
           console.log("Completed uploading of file: " + file.name);
+          loading.remove();
+          progressContainer.style.display = "none";
+          var message = document.createElement("P");
+          var messageText = document.createTextNode("We received your submission, thank you and good luck!");
+          message.setAttribute("style", "text-align: center; margin-bottom: 20px;")
+          message.appendChild(messageText);
+          formElementsContainer.innerHTML = "";
+          formElementsContainer.appendChild(message);
         })
         .catch(function (error) {
           console.error(error);
@@ -77,9 +94,9 @@
       var sessionId;
       var bytesUploaded = 0;
       var result = Promise.resolve();
-      workItems.forEach(function(workItem) {
+      workItems.forEach(function (workItem) {
         var file = workItem.file;
-        result = result.then(function() {
+        result = result.then(function () {
           if (!workItem.chunk) {
             console.log("Uploading file:", file.name);
             return dbx.filesUpload({ path: '/' + firstName + ' ' + lastName + '/' + file.name, contents: file })
@@ -87,7 +104,7 @@
                 console.log(response);
                 console.log("Completed uploading of file: " + file.name);
                 bytesUploaded += workItem.size;
-                console.log("progress", bytesUploaded/workItemsSize);
+                console.log("progress", bytesUploaded / workItemsSize);
                 bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
               })
               .catch(function (error) {
@@ -96,23 +113,23 @@
           } else if (workItem.offset === 0) {
             console.log("Starting multipart upload of file:", file.name);
             var blob = file.slice(workItem.offset, workItem.end);
-            return dbx.filesUploadSessionStart({close: false, contents: blob})
-              .then(function(response) {
+            return dbx.filesUploadSessionStart({ close: false, contents: blob })
+              .then(function (response) {
                 sessionId = response.session_id;
                 console.log("Complete multipart upload start, sessionId:", sessionId);
                 bytesUploaded += workItem.size;
-                console.log("progress", bytesUploaded/workItemsSize);
+                console.log("progress", bytesUploaded / workItemsSize);
                 bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
               })
           } else if (!workItem.close) {
             console.log("Putting chunk in multipart upload of file:", file.name);
             var cursor = { session_id: sessionId, offset: workItem.offset };
             var blob = file.slice(workItem.offset, workItem.end);
-            return dbx.filesUploadSessionAppendV2({cursor: cursor, close: false, contents: blob})
-              .then(function(response) {
+            return dbx.filesUploadSessionAppendV2({ cursor: cursor, close: false, contents: blob })
+              .then(function (response) {
                 console.log("Complete multipart upload append");
                 bytesUploaded += workItem.size;
-                console.log("progress", bytesUploaded/workItemsSize);
+                console.log("progress", bytesUploaded / workItemsSize);
                 bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
               })
           } else {
@@ -120,37 +137,49 @@
             var cursor = { session_id: sessionId, offset: workItem.offset };
             var commit = { path: '/' + firstName + ' ' + lastName + '/' + file.name, mode: 'add', autorename: true, mute: false };
             var blob = file.slice(workItem.offset, workItem.end);
-            return dbx.filesUploadSessionFinish({ cursor: cursor, commit: commit, contents: blob})
-              .then(function(response) {
+            return dbx.filesUploadSessionFinish({ cursor: cursor, commit: commit, contents: blob })
+              .then(function (response) {
                 console.log("Complete multipart upload finish");
                 sessionId = null;
                 bytesUploaded += workItem.size;
-                console.log("progress", bytesUploaded/workItemsSize);
-                bar.animate(bytesUploaded/workItemsSize, {duration: 1500});
+                console.log("progress", bytesUploaded / workItemsSize);
+                bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
               })
           }
         })
       })
-      result.then(function() {
-        console.log("Complete upload of workitem(s)");
+      result.then(function () {
+        loading.remove();
+        formElementsContainer.style.display = "none";
+        var message = document.createElement("P");
+        var messageText = document.createTextNode("We received your submission, thank you and good luck!");
+        message.setAttribute("style", "text-align: center; margin-bottom: 20px;")
+        message.appendChild(messageText);
+        formElementsContainer.innerHTML = "";
+        formElementsContainer.appendChild(message);
         if (myDropzone.files.length === 1) {
           console.log("Completed uploading of file: " + myDropzone.files[0].name)
         } else {
           console.log("Completed uploading of multiple files")
         }
       })
-      .catch(function(reason) {
-        console.log("ERR:", reason)
-      })
+        .catch(function (reason) {
+          console.log("ERR:", reason)
+        })
     }
     return false;
   };
   var head = document.head;
-  var link = document.createElement("link");
-  link.type="text/css";
-  link.rel ="stylesheet";
-  link.href = "http://www2.archsystems.com/l/67312/2018-01-18/bbf6xw/67312/171300/dropzone.css";
-  head.appendChild(link);
+  var dropzoneLink = document.createElement("link");
+  dropzoneLink.type = "text/css";
+  dropzoneLink.rel = "stylesheet";
+  dropzoneLink.href = "http://www2.archsystems.com/l/67312/2018-01-18/bbf6xw/67312/171300/dropzone.css";
+  var customLink = document.createElement("link");
+  customLink.type = "text/css";
+  customLink.rel = "stylesheet";
+  customLink.href = "http://www2.archsystems.com/l/67312/2018-01-19/bbg7mw/67312/171454/main.css"
+  head.appendChild(dropzoneLink);
+  head.appendChild(customLink);
   var form = document.getElementsByTagName("form");
   form[0].addEventListener("submit", uploadFiles, false);
   var newDropZoneItem = document.createElement("Div");
@@ -162,6 +191,11 @@
     url: "http://www2.archsystems.com/l/67312/2018-01-18/bbd5my",
     dictDefaultMessage: "Drop Photos or Videos Here"
   }
-  form[0].insertBefore(newDropZoneItem, form[0].childNodes[24]);
+  document.getElementsByClassName("submit")[0].insertAdjacentElement('beforebegin', newDropZoneItem);
   document.body.appendChild(newProgressBarContainer);
+  Array.from(document.getElementsByClassName("form-field")).forEach(function (el) {
+    var container = document.getElementById("form-elements");
+    container.appendChild(el);
+    container.appendChild(newDropZoneItem);
+  })
 </script>

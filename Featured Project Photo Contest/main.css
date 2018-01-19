@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: bold;
+}
+
+p {
+  font-size: 18px;
+}
+
+#form-elements {
+  max-width: 730px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#form-elements input {
+  border: 2px solid #BF3060;
+  border-radius: 5px;
+  padding: 1em;
+}
+
+form.form p label {
+  height: 1.5em;
+}
+
+form.form p.required label, 
+form.form span.required label {
+  background-position: top left; 
+}
+
+.submit {
+  margin: 0 auto !important;
+  text-align: center;
+  padding: 20px !important;
+}
+
+.submit input {
+  background: #BF3060;
+  border: none;
+  border-radius: 5px;
+  padding: 1em !important;
+  color: white;
+}
+
+.dropzone {
+  border: 2px solid #BF3060 !important;
+  color: #BF3060;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 5px;
+}
