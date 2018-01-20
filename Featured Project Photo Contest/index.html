@@ -103,7 +103,6 @@
           console.error(error);
         });
     } else {
-      var msg = (myDropzone.files.length === 1) ? "Uploading file: " + myDropzone.files[0].name : "Uploading files";
       var sessionId;
       var bytesUploaded = 0;
       var result = Promise.resolve();
