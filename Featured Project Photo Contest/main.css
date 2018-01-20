@@ -58,3 +58,7 @@ form.form span.required label {
   width: 100%;
   border-radius: 5px;
 }
+
+#container {
+  width: 100%;
+}
