@@ -49,6 +49,7 @@ form.form span.required label {
   border-radius: 5px;
   padding: 1em !important;
   color: white;
+  cursor: pointer;  
 }
 
 .dropzone {
