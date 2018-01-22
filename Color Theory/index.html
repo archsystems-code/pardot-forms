@@ -1,0 +1,264 @@
+<!-- Above form -->
+<style type="text/css">
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  html {
+    overflow-y: scroll;
+  }
+
+  body {
+    background: #c1bdba;
+    font-family: 'Titillium Web', sans-serif;
+  }
+
+
+  a {
+    text-decoration: none;
+    color: #1ab188;
+    -webkit-transition: .5s ease;
+    transition: .5s ease;
+  }
+
+  a:hover {
+    color: #179b77;
+  }
+
+  form.form {
+    background: rgba(19, 35, 47, 0.9);
+    padding: 40px;
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+    font: inherit;
+  }
+
+  form.form input.text {
+    width: inherit;
+    margin-bottom: 20px;
+    text-indent: 25px;
+  }
+
+  form.form input {
+    padding: 5px 10px;
+  }
+
+  .form-field:nth-child(n+1) {
+    width: 100%;
+  }
+
+  form.form p.required label,
+  form.form span.required label {
+    background: initial;
+  }
+
+  p.required:after {
+    content: '*';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: red;
+    font-size: 2em;
+  }
+
+  form.form p label {
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 3px 13px 0 0;
+    width: 350px;
+    margin-left: 25px;
+    line-height: 1em;
+    padding-top: 0;
+    text-align: left;
+  }
+
+  h1 {
+    text-align: center;
+    color: #ffffff;
+    font-weight: 300;
+    line-height: 1em;
+    font-size: 1.75em;
+  }
+
+  label {
+    position: absolute;
+    -webkit-transform: translateY(6px);
+    transform: translateY(6px);
+    left: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+    -webkit-backface-visibility: hidden;
+    pointer-events: none;
+    font-size: 22px;
+  }
+
+  label .req {
+    margin: 2px;
+    color: #1ab188;
+  }
+
+  label.active {
+    -webkit-transform: translateY(50px);
+    transform: translateY(50px);
+    left: 2px;
+    font-size: 14px;
+  }
+
+  label.active .req {
+    opacity: 0;
+  }
+
+  label.highlight {
+    color: #ffffff;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    background: none;
+    background-image: none;
+    border: 1px solid #a0b3b0;
+    color: #ffffff;
+    border-radius: 0;
+    -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+    transition: border-color .25s ease, box-shadow .25s ease;
+  }
+
+  select {
+    margin-bottom: 20px;
+    text-indent: 20px;
+  }
+
+  option {
+    color: grey;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 0;
+    border-color: #1ab188;
+  }
+
+  textarea {
+    border: 2px solid #a0b3b0;
+    resize: vertical;
+    width: 100% !important;
+  }
+
+  .form-field {
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  .top-row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .top-row>div {
+    float: left;
+    width: 48%;
+    margin-right: 4%;
+  }
+
+  .top-row>div:last-child {
+    margin: 0;
+  }
+
+  form.form p.submit {
+    margin: 0 auto;
+    max-width: 150px;
+  }
+
+  .submit {
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    padding: 15px 0;
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background: #1ab188;
+    color: #ffffff;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    -webkit-appearance: none;
+  }
+
+  .submit:hover,
+  .submit:focus {
+    background: #179b77;
+  }
+
+  .button-block {
+    display: block;
+    width: 100%;
+  }
+</style>
+<h1>Happening Soon!</h1>
+
+<p>
+  <img alt="" border="0" src="http://www2.archsystems.com/l/67312/2017-08-02/b2xp2n/67312/157285/colortheory2.jpg" style="width: 100%; box-shadow: white 1px 1px 5px; border-width: 0px; border-style: solid;"
+    width="100" />
+</p>
+
+<h1>Please fill out the form below to ensure you receive samples as soon as they&#39;re available.</h1>
+
+<h1>Thank you for your inquiry.</h1>
+<!-- Below form  -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector("form").addEventListener("submit", function (e) {
+      var submitButton = document.querySelector('input[type="submit"]');
+      submitButton.disabled = "disabled";
+      submitButton.value = "Submitting";
+    });
+    document.querySelector('select[name="67312_121783pi_67312_121783"]').onchange = handleLabels;
+    document.querySelector('select[name="67312_123397pi_67312_123397"]').onchange = handleLabels;
+    var inputs = document.getElementsByTagName("input");
+    for (i = 0; i < inputs.length; i++) {
+      if (inputs[i].value.length > 0) {
+        if (inputs[i].previousElementSibling) {
+          inputs[i].previousElementSibling.style.opacity = 0;
+        }
+      }
+      inputs[i].oninput = handleLabels;
+    }
+    var selects = document.getElementsByTagName("select");
+    for (i = 0; i < selects.length; i++) {
+      if (selects[i].value.length > 0) {
+        if (selects[i].previousElementSibling) {
+          selects[i].previousElementSibling.style.opacity = 0;
+        }
+      }
+      selects[i].oninput = handleLabels;
+    }
+  }, false);
+
+  function handleLabels(e) {
+    if (this.selectedIndex !== 0) {
+      this.previousElementSibling.style.opacity = 0;
+    } else {
+      this.previousElementSibling.style.opacity = 1;
+    }
+    if (this.value.length > 0) {
+      this.previousElementSibling.style.opacity = 0;
+    } else {
+      this.previousElementSibling.style.opacity = 1;
+    }
+  }
+</script>
