@@ -50,7 +50,8 @@ form.form span.required label {
   border-radius: 5px;
   padding: 1em !important;
   color: white;
-  cursor: pointer;  
+  cursor: pointer;
+  -webkit-appearance: none;  
 }
 
 .dropzone {
@@ -63,4 +64,14 @@ form.form span.required label {
 
 #container {
   width: 100%;
+}
+
+.disclaimer {
+  height: 90px;
+}
+
+@media screen and (min-width: 800px) {
+  .disclaimer {
+    height: 50px;
+  }
 }

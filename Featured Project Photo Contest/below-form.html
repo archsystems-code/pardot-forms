@@ -37,6 +37,7 @@
   var maxBlob = 8 * 1000 * 1000;
   function uploadFiles(e) {
     e.preventDefault();
+    window.scrollTo(0, 0);
     var firstName = document.getElementById("67312_132962pi_67312_132962").value;
     var lastName = document.getElementById("67312_132964pi_67312_132964").value;
     var email = document.getElementById("67312_132968pi_67312_132968").value;
@@ -189,7 +190,7 @@
   var customLink = document.createElement("link");
   customLink.type = "text/css";
   customLink.rel = "stylesheet";
-  customLink.href = "http://www2.archsystems.com/l/67312/2018-01-20/bbgdtf/67312/171480/main.css";
+  customLink.href = "http://www2.archsystems.com/l/67312/2018-01-23/bbh9r7/67312/171630/main.css";
   head.appendChild(dropzoneLink);
   head.appendChild(customLink);
   $("head").append('<meta name="viewport" content="width=device-width, initial-scale=1">');
@@ -209,8 +210,8 @@
   authorizationLabel.setAttribute("for", "authorization");
   authorizationLabel.setAttribute("id", "authorization-checkbox");
   var authorization = document.createElement("p");
-  authorization.setAttribute("class", "form-field");
-  authorization.setAttribute("style", "display: inline-flex; height: 75px; font-size: 13px;");
+  authorization.setAttribute("class", "form-field disclaimer");
+  authorization.setAttribute("style", "display: inline-flex; font-size: 13px;");
   authorization.appendChild(authorizationCheckbox);
   authorization.appendChild(authorizationLabel);
   Dropzone.options.fileUpload = {
