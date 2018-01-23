@@ -41,6 +41,8 @@
     var firstName = document.getElementById("67312_132962pi_67312_132962").value;
     var lastName = document.getElementById("67312_132964pi_67312_132964").value;
     var email = document.getElementById("67312_132968pi_67312_132968").value;
+    var projectName = document.getElementById("67312_133262pi_67312_133262").value;
+    var projectLocation = document.getElementById("67312_133264pi_67312_133264").value;
     var myDropzone = Dropzone.forElement("#file-upload");
     if (myDropzone.files.length === 0) {
       $(".dropzone").css("color", "white");
@@ -57,6 +59,14 @@
     }
     if (email.length === 0) {
       $("#67312_132968pi_67312_132968").css("background", "#e74c3c");
+      return false;
+    }
+    if (projectName.length === 0) {
+      $("#67312_133262pi_67312_133262").css("background", "#e74c3c");
+      return false;
+    }
+    if (projectLocation.length === 0) {
+      $("#67312_133264pi_67312_133264").css("background", "#e74c3c");
       return false;
     }
     var theData = $(this).serialize();
