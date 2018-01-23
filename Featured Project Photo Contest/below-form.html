@@ -192,6 +192,7 @@
   customLink.href = "http://www2.archsystems.com/l/67312/2018-01-20/bbgdtf/67312/171480/main.css";
   head.appendChild(dropzoneLink);
   head.appendChild(customLink);
+  $("head").append('<meta name="viewport" content="width=device-width, initial-scale=1">');
   var form = document.getElementsByTagName("form");
   form[0].addEventListener("submit", uploadFiles, false);
   var newDropZoneItem = document.createElement("div");
