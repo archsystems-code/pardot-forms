@@ -1,12 +1,21 @@
-<div style="background-image: url(' http://www2.archsystems.com/l/67312/2018-01-19/bbg6k5/67312/171420/bg_min.jpg'); background-size: 100% auto;width: 100%; min-height: 100vh;background-repeat: no-repeat; background-position: center center;"></div>
-<img alt="" border="0" src="http://www2.archsystems.com/l/67312/2018-01-19/bbg3nt/67312/171412/footer.jpg" style="width: 100%; height: auto; border-width: 0px; border-style: solid;"
-/>
+<div style="width: 100%; position: relative;">
+  <img src="http://www2.archsystems.com/l/67312/2018-01-19/bbg6k5/67312/171420/bg_min.jpg" width="100%" alt="">
+  <div class="project-div" data-link="https://www.archsystems.com/en-US/Projects/Corporate/Project-Details/CDI/" style="cursor: pointer; width: 25%; height: 50%; position: absolute; top: 0; left: 0;"></div>
+  <div class="project-div" data-link="https://www.archsystems.com/en-US/Projects/Retail/Project-Details/Saks-Fifth-Avenue-Honolulu-HI/" style="cursor: pointer; width: 25%; height: 50%; position: absolute; top: 0; right: 0;"></div>
+  <div class="project-div" data-link="https://www.archsystems.com/en-US/Projects/Retail/Project-Details/Vera-Bradley/" style="cursor: pointer; width: 25%; height: 50%; position: absolute; bottom: 0; left: 0;"></div>
+  <div class="project-div" data-link="https://www.archsystems.com/en-US/Projects/Hospitality/Project-Details/Marriott-New-York-at-the-Brooklyn-Bridge/" style="cursor: pointer; width: 25%; height: 50%; position: absolute; bottom: 0; right: 0;"></div>
+</div>
+<a href="https://archsystems.com"><img alt="" border="0" src="http://www2.archsystems.com/l/67312/2018-01-19/bbg3nt/67312/171412/footer.jpg" style="width: 100%; height: auto; border-width: 0px; border-style: solid;"
+/></a>
 <!-- Below Form -->
 <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
 <script src="http://www2.archsystems.com/l/67312/2018-01-18/bbf6h3/67312/171294/dropzone.js"></script>
 <script src="http://www2.archsystems.com/l/67312/2018-01-19/bbffwf/67312/171344/progressbar.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+  function handleProjectClick() {
+    window.open($(this).data().link, "_blank");
+  }
   var maxBlob = 8 * 1000 * 1000;
   function uploadFiles(e) {
     e.preventDefault();
@@ -187,8 +196,7 @@
   authorizationCheckbox.setAttribute("checked", "true");
   var authorizationLabel = document.createElement("label");
   authorizationLabel.setAttribute("for", "authorization");
-  var labelText = document.createTextNode("By selecting this Authorization Box, You authorize Architectural Systems to use image(s) of the mentioned project for internal marketing purposes to include email marketing, catalogue, product binders, website use (www.archsystems.com), and continuing education (CEU) presentations. ASI agrees to always credit the project and designer/architect indicated as well as photographer when requested.");
-  authorizationLabel.appendChild(labelText);
+  authorizationLabel.setAttribute("id", "authorization-checkbox");
   var authorization = document.createElement("p");
   authorization.setAttribute("class", "form-field");
   authorization.setAttribute("style", "display: inline-flex; height: 75px; font-size: 13px;");
@@ -206,4 +214,13 @@
     container.appendChild(newDropZoneItem);
   });
   document.getElementsByClassName("email")[0].insertAdjacentElement('afterend', authorization);
+  $(document).ready(function () {
+    $(".project-div").on("click", handleProjectClick)
+    $("#authorization-checkbox").html("By selecting this Authorization Box, You authorize Architectural Systems to use image(s) of the mentioned project for internal marketing purposes to include email marketing, catalogue, product binders, website use (<a href='https://archsystems.com' style='color: #BF3060'>archsystems.com</a>), and continuing education (CEU) presentations. ASI agrees to always credit the project and designer/architect indicated as well as photographer when requested.")
+  });
 </script>
+<!-- begin olark code -->
+<script type="text/javascript" async> ; (function (o, l, a, r, k, y) { if (o.olark) return; r = "script"; y = l.createElement(r); r = l.getElementsByTagName(r)[0]; y.async = 1; y.src = "//" + a; r.parentNode.insertBefore(y, r); y = o.olark = function () { k.s.push(arguments); k.t.push(+new Date) }; y.extend = function (i, j) { y("extend", i, j) }; y.identify = function (i) { y("identify", k.i = i) }; y.configure = function (i, j) { y("configure", i, j); k.c[i] = j }; k = y._ = { s: [], t: [+new Date], c: {}, l: a }; })(window, document, "static.olark.com/jsclient/loader.js");
+  /* custom configuration goes here (www.olark.com/documentation) */
+  olark.identify('7635-468-10-3405');</script>
+<!-- end olark code -->
