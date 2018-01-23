@@ -6,13 +6,31 @@
   <div class="project-div" data-link="https://www.archsystems.com/en-US/Projects/Hospitality/Project-Details/Marriott-New-York-at-the-Brooklyn-Bridge/" style="cursor: pointer; width: 25%; height: 50%; position: absolute; bottom: 0; right: 0;"></div>
 </div>
 <a href="https://archsystems.com"><img alt="" border="0" src="http://www2.archsystems.com/l/67312/2018-01-19/bbg3nt/67312/171412/footer.jpg" style="width: 100%; height: auto; border-width: 0px; border-style: solid;"
-/></a>
-<!-- Below Form -->
+  /></a>
 <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
 <script src="http://www2.archsystems.com/l/67312/2018-01-18/bbf6h3/67312/171294/dropzone.js"></script>
 <script src="http://www2.archsystems.com/l/67312/2018-01-19/bbffwf/67312/171344/progressbar.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.js?features=es6"></script>
+<script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
 <script>
+  "use strict";
+
+  (function () {
+    function CustomEvent(event, params) {
+      params = params || { bubbles: false, cancelable: false, detail: undefined };
+      var evt = document.createEvent('CustomEvent');
+      evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+      return evt;
+    }
+
+    CustomEvent.prototype = window.Event.prototype;
+
+    window.CustomEvent = CustomEvent;
+  })();
+  
+
   function handleProjectClick() {
     window.open($(this).data().link, "_blank");
   }
@@ -25,7 +43,7 @@
     var myDropzone = Dropzone.forElement("#file-upload");
     if (myDropzone.files.length === 0) {
       $(".dropzone").css("color", "white");
-      $(".dropzone").css("background-color", "#e74c3c")
+      $(".dropzone").css("background-color", "#e74c3c");
       return false;
     }
     if (firstName.length === 0) {
@@ -41,9 +59,9 @@
       return false;
     }
     var theData = $(this).serialize();
-    $.post("http://www2.archsystems.com/l/67312/2018-01-18/bbd5my", theData)
+    $.post("http://www2.archsystems.com/l/67312/2018-01-18/bbd5my", theData);
     var ACCESS_TOKEN = "E2kOOrj3PAoAAAAAAAAV3iglJznk6_o8_PNYC16bHyIWLXCrPQxQXZLB-Nt7SfcJ";
-    var dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
+    var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
     var bar = new ProgressBar.Line("#container", {
       strokeWidth: 4,
       easing: 'easeInOut',
@@ -62,21 +80,21 @@
           transform: null
         }
       },
-      step: (state, bar) => {
-        bar.setText(Math.round(bar.value() * 100) + "%")
+      step: function step(state, bar) {
+        bar.setText(Math.round(bar.value() * 100) + "%");
       }
-    })
+    });
     var progressContainer = document.getElementById("container");
     var submit = document.getElementsByClassName("submit")[0];
     var loading = document.createElement("p");
     var loadingText = document.createTextNode("Please wait while we upload your submission");
-    loading.setAttribute("style", "text-align: center; margin-bottom: 20px;")
+    loading.setAttribute("style", "text-align: center; margin-bottom: 20px;");
     loading.appendChild(loadingText);
     submit.style.display = "none";
     var formElementsContainer = document.getElementById("form-elements");
     formElementsContainer.innerHTML = "";
     formElementsContainer.appendChild(progressContainer);
-    formElementsContainer.appendChild(loading)
+    formElementsContainer.appendChild(loading);
     var workItems = [];
     var workItemsSize = 0;
     myDropzone.files.forEach(function (file) {
@@ -97,20 +115,18 @@
     if (workItems.length === 1) {
       var file = workItems[0].file;
       bar.animate(1.0);
-      dbx.filesUpload({ path: '/' + firstName + ' ' + lastName + '/' + file.name, contents: file })
-        .then(function (response) {
-          loading.remove();
-          progressContainer.style.display = "none";
-          var message = document.createElement("p");
-          var messageText = document.createTextNode("We received your submission, thank you and good luck!");
-          message.setAttribute("style", "text-align: center; margin-bottom: 20px;")
-          message.appendChild(messageText);
-          formElementsContainer.innerHTML = "";
-          formElementsContainer.appendChild(message);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+      dbx.filesUpload({ path: '/' + firstName + ' ' + lastName + '/' + file.name, contents: file }).then(function (response) {
+        loading.style.display = "none";
+        progressContainer.style.display = "none";
+        var message = document.createElement("p");
+        var messageText = document.createTextNode("We received your submission, thank you and good luck!");
+        message.setAttribute("style", "text-align: center; margin-bottom: 20px;");
+        message.appendChild(messageText);
+        formElementsContainer.innerHTML = "";
+        formElementsContainer.appendChild(message);
+      }).catch(function (error) {
+        console.error(error);
+      });
     } else {
       var sessionId;
       var bytesUploaded = 0;
@@ -119,55 +135,49 @@
         var file = workItem.file;
         result = result.then(function () {
           if (!workItem.chunk) {
-            return dbx.filesUpload({ path: '/' + firstName + ' ' + lastName + '/' + file.name, contents: file })
-              .then(function (response) {
-                bytesUploaded += workItem.size;
-                bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
-              })
-              .catch(function (error) {
-                console.error(error);
-              });
+            return dbx.filesUpload({ path: '/' + firstName + ' ' + lastName + '/' + file.name, contents: file }).then(function (response) {
+              bytesUploaded += workItem.size;
+              bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
+            }).catch(function (error) {
+              console.error(error);
+            });
           } else if (workItem.offset === 0) {
             var blob = file.slice(workItem.offset, workItem.end);
-            return dbx.filesUploadSessionStart({ close: false, contents: blob })
-              .then(function (response) {
-                sessionId = response.session_id;
-                bytesUploaded += workItem.size;
-                bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
-              })
+            return dbx.filesUploadSessionStart({ close: false, contents: blob }).then(function (response) {
+              sessionId = response.session_id;
+              bytesUploaded += workItem.size;
+              bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
+            });
           } else if (!workItem.close) {
             var cursor = { session_id: sessionId, offset: workItem.offset };
             var blob = file.slice(workItem.offset, workItem.end);
-            return dbx.filesUploadSessionAppendV2({ cursor: cursor, close: false, contents: blob })
-              .then(function (response) {
-                bytesUploaded += workItem.size;
-                bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
-              })
+            return dbx.filesUploadSessionAppendV2({ cursor: cursor, close: false, contents: blob }).then(function (response) {
+              bytesUploaded += workItem.size;
+              bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
+            });
           } else {
             var cursor = { session_id: sessionId, offset: workItem.offset };
             var commit = { path: '/' + firstName + ' ' + lastName + '/' + file.name, mode: 'add', autorename: true, mute: false };
             var blob = file.slice(workItem.offset, workItem.end);
-            return dbx.filesUploadSessionFinish({ cursor: cursor, commit: commit, contents: blob })
-              .then(function (response) {
-                sessionId = null;
-                bytesUploaded += workItem.size;
-                bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
-              })
+            return dbx.filesUploadSessionFinish({ cursor: cursor, commit: commit, contents: blob }).then(function (response) {
+              sessionId = null;
+              bytesUploaded += workItem.size;
+              bar.animate(bytesUploaded / workItemsSize, { duration: 1500 });
+            });
           }
-        })
-      })
+        });
+      });
       result.then(function () {
-        loading.remove();
+        loading.style.display = "none";
         var message = document.createElement("p");
         var messageText = document.createTextNode("We received your submission, thank you and good luck!");
-        message.setAttribute("style", "text-align: center; margin-bottom: 20px;")
+        message.setAttribute("style", "text-align: center; margin-bottom: 20px;");
         message.appendChild(messageText);
         formElementsContainer.innerHTML = "";
         formElementsContainer.appendChild(message);
-      })
-        .catch(function (reason) {
-          console.log("ERR:", reason)
-        })
+      }).catch(function (reason) {
+        console.log("ERR:", reason);
+      });
     }
     return false;
   };
@@ -179,7 +189,7 @@
   var customLink = document.createElement("link");
   customLink.type = "text/css";
   customLink.rel = "stylesheet";
-  customLink.href = "http://www2.archsystems.com/l/67312/2018-01-20/bbgdtf/67312/171480/main.css"
+  customLink.href = "http://www2.archsystems.com/l/67312/2018-01-20/bbgdtf/67312/171480/main.css";
   head.appendChild(dropzoneLink);
   head.appendChild(customLink);
   var form = document.getElementsByTagName("form");
@@ -205,19 +215,18 @@
   Dropzone.options.fileUpload = {
     url: "http://www2.archsystems.com/l/67312/2018-01-18/bbd5my",
     dictDefaultMessage: "Drop Photos or Videos Here"
-  }
+  };
   document.getElementsByClassName("submit")[0].insertAdjacentElement('beforebegin', newDropZoneItem);
   document.body.appendChild(newProgressBarContainer);
-  Array.from(document.getElementsByClassName("form-field")).forEach(function (el) {
+  $(".form-field").each(function (i, el) {
     var container = document.getElementById("form-elements");
     container.appendChild(el);
     container.appendChild(newDropZoneItem);
   });
   document.getElementsByClassName("email")[0].insertAdjacentElement('afterend', authorization);
   $(document).ready(function () {
-    $(".project-div").on("click", handleProjectClick)
-    $("#authorization-checkbox").html("By selecting this Authorization Box, You authorize Architectural Systems to use image(s) of the mentioned project for internal marketing purposes to include email marketing, catalogue, product binders, website use (<a href='https://archsystems.com' style='color: #BF3060'>archsystems.com</a>), and continuing education (CEU) presentations. ASI agrees to always credit the project and designer/architect indicated as well as photographer when requested.")
-    $("<p style='text-align: center'>Having an issue? Contact <a style='color: #BF3060' href='mailto:wsmith@archsystems.com'>wsmith@archsysetems.com</a> for assistance.</p>").insertAfter(".submit")
+    $(".project-div").on("click", handleProjectClick);
+    $("#authorization-checkbox").html("By selecting this Authorization Box, You authorize Architectural Systems to use image(s) of the mentioned project for internal marketing purposes to include email marketing, catalogue, product binders, website use (<a href='https://archsystems.com' style='color: #BF3060'>archsystems.com</a>), and continuing education (CEU) presentations. ASI agrees to always credit the project and designer/architect indicated as well as photographer when requested.");
+    $("<p style='text-align: center'>Having an issue? Contact <a style='color: #BF3060' href='mailto:wsmith@archsystems.com'>wsmith@archsysetems.com</a> for assistance.</p>").insertAfter(".submit");
   });
-
 </script>
