@@ -1,16 +1,31 @@
 <style type="text/css">
+  @import url('https://fonts.googleapis.com/css?family=Encode+Sans|Hind+Siliguri|Montserrat:200,400');
+
+  html,
+  body {
+    height: 100%;
+  }
+
   body {
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-image: url('http://www2.archsystems.com/l/67312/2018-04-30/bg87mm/67312/179552/Showroom_3_min.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   form {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #E0DFDF;
-    border-radius: 5px;
-    padding: 10px;
     text-align: center;
+    max-width: 510px;
+  }
+
+  form.form {
+    padding: 0;
+    background-color: white;
   }
 
   form.form input.text {
@@ -41,14 +56,43 @@
   form.form input.date,
   form.form select {
     margin: 10px !important;
+    font-family: 'Encode Sans', sans-serif;
+    font-size: 13px;
+    background-color: #FAFAFA;
+    line-height: 26px;
+  }
+
+  form.form label.field-label {
+    font-family: 'Encode Sans', sans-serif;
+    font-size: 13px;
+  }
+
+  form.form p.submit {
+    margin: 1em .5em .2em 0;
   }
 
   .submit input {
     background-color: #61A60D;
     border: none;
     border-radius: 5px;
-    padding: 10px !important;
+    padding: 9px !important;
     color: white;
     margin: 20px !important;
+    min-width: 210px;
+    line-height: 26px;
+  }
+
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    color: #434343;
+    background-color: #F3F2F2;
+    font-size: 30px;
+    line-height: 40px;
+    margin: 0;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
   }
 </style>
+<h1>Enter Your Info To RSVP</h1>
