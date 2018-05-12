@@ -1,0 +1,10 @@
+<script>
+  var formContainer = document.getElementById("form-container");
+  var pTags = document.getElementsByTagName("p");
+  var pArry = [].slice.call(pTags);
+  pArry.forEach(function (el) {
+    var errorDiv = el.nextElementSibling;
+    formContainer.appendChild(el);
+    formContainer.appendChild(errorDiv);
+  })
+</script>
