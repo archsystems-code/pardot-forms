@@ -1,0 +1,29 @@
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#67312_147719pi_67312_147719').change(function(e) {
+      if (e.target.value === '1199565') {
+        $('.Project_or_Library_Name').css('display', 'flex')
+        $('.Project_or_Library_Name').css('align-items', 'center')
+        $('.Project_or_Library_Name').css('width', '45%')
+      } else {
+        $('.Project_or_Library_Name').css('display', 'none')
+      }
+
+    })
+
+    $("#67312_147723pi_67312_147723").change(function(e) {
+      if ( e.target.value.length > 0 ) {
+        $('.Request_Reason').css('display', 'flex')
+        $('.Request_Reason').css('align-items', 'center')
+        $('.Request_Reason').css('width', '45%')
+      } else {
+        $('.Request_Reason').css('display', 'none');
+      }
+    })
+  })
+</script>
