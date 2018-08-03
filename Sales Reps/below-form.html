@@ -2,6 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.3/ofi.min.js"></script>
   <script>
     function toggleInputSelect(e) {
+      e.preventDefault();
       $(".title").removeClass("shimmer");
       var $input = $($(e.currentTarget).parent().parent().children()[0]);
       var $select = $($(e.currentTarget).parent().children()[1]);
@@ -17,6 +18,11 @@
       var firstName = $("#67312_149945pi_67312_149945").val();
       var lastName = $("#67312_149947pi_67312_149947").val();
       var email = $("#67312_149949pi_67312_149949").val();
+      var binder = $("#67312_149953pi_67312_149953_1218279");
+      var brochure = $("#67312_149953pi_67312_149953_1218281");
+      var sign = $("#67312_149953pi_67312_149953_1218283");
+      var chain = $("#67312_149953pi_67312_149953_1218285");
+      var skuQuantity = $(".quantity input");
       if (firstName.length === 0) {
         $("#67312_149945pi_67312_149945").css("background", "#DD4E75");
         return false;
@@ -39,10 +45,32 @@
         $(".title").addClass("shimmer")
         return false;
       }
+      var skuQuantityInput = "";
+      if (binder.prop("checked")) {
+        var hasOthers = brochure.prop("checked") || sign.prop("checked") || chain.prop("checked")
+        var quantity = $("." + binder.prop("id")).val();
+        skuQuantityInput += quantity + hasOthers ? ", " : "";
+      }
+      if (brochure.prop("checked")) {
+        var quantity = $("." + brochure.prop("id")).val();
+        skuQuantityInput += quantity + ", "
+      }
+      if (sign.prop("checked")) {
+        var quantity = $("." + sign.prop("id")).val();
+        skuQuantityInput += quantity + ", "
+      }
+      if (chain.prop("checked")) {
+        var quantity = $("." + chain.prop("id")).val();
+        skuQuantityInput += quantity
+      }
+      skuQuantity.val(skuQuantityInput);
       var theData = $(this).serialize();
-      $.post("https://www2.archsystems.com/l/67312/2018-08-02/bjkxfs", theData);
-      $("form").hide();
-      $(".title").text("We received your request and will get your resources to you right away!")
+      var request = $.post("https://www2.archsystems.com/l/67312/2018-08-02/bjkxfs", theData);
+      request.done(function(response){
+        document.open();
+        document.write(response);
+        document.close();
+      })
     }
     var head = document.head;
     var meta = document.createElement("meta");
@@ -71,7 +99,7 @@
     $(".value").children().each(function(i, el){
       $(el).addClass("resource");
       var quanitityInput = document.createElement("select");
-      quanitityInput.name = $(el).children()[0].name;
+      quanitityInput.classList.add($(el).children()[0].name);
       quanitityInput.classList.add("is-hidden");
       var selectButton = document.createElement("button");
       selectButton.textContent = "SELECT";
