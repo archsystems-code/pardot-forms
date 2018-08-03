@@ -21,24 +21,159 @@
     font-size: 18px;
   }
 
+  p.title {
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    color: #434343;"
+  }
+
+  p.title.shimmer {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 30px;
+    background: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    background: -moz-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    background: gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    -webkit-background-size: 125px 100%;
+    -moz-background-size: 125px 100%;
+    background-size: 125px 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-animation-name: shimmer;
+    -moz-animation-name: shimmer;
+    animation-name: shimmer;
+    -webkit-animation-duration: 3s;
+    -moz-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: #222;
+  }
+
+@-moz-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@-webkit-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@-o-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+
+
   form.form {
-    max-width: 486px;
-    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+    max-width: 90%;
   }
 
-  form.form input,
-  form.form select{
+  form.form input {
     border: 1px solid #d4d2d2;
     border-radius: 4px;
     padding: 1em;
   }
 
-  form.form select {
-    width: 228px;
-    padding: 0.9em;
+  form.form input[type='checkbox'] {
+    display: none;
+  }
+
+  form.form p label.inline {
+    margin: 5px auto;
+    padding: 0;
+  }
+  @media screen and (max-width: 946px) {
+    form.form p label.inline {
+      font-size: 13px;
+    }
+  }
+
+  form.form p.SKU {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  form.form span.value {
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  form.form span.resource {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 0;
+    text-align: center;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.16), 0 0 2px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.16), 0 0 2px 0 rgba(0,0,0,.12);
+    cursor: pointer;
+  }
+
+  form.form .selection-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  @media screen and (min-width: 640px) {
+    form.form span.resource {
+      width: 30%;
+    }
+  }
+
+  form.form span.resource img.poster {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    font-family: 'object-fit: contain;';
+    margin-bottom: 10px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    form.form span.resource {
+      width: 20%;
+    }
+    form.form span.resource img.poster {
+      height: 200px;
+    }
+  }
+
+  form.form span.resource input {
+    margin-top: -15px;
   }
 
   form.form p label {
@@ -54,12 +189,13 @@
   }
 
   .submit {
-    margin: 0 auto !important;
     text-align: center;
-    padding: 20px !important;
+    padding-top: 15px !important;
+    margin-left: 10px !important;
   }
 
-  .submit input {
+  .submit input,
+  button {
     background: #61A60D;
     border: none;
     border-radius: 4px;
@@ -67,6 +203,17 @@
     color: white;
     cursor: pointer;
     -webkit-appearance: none;
+  }
+
+  select {
+    border: none;
+    border-radius: 4px;
+    padding: 1em !important;
+    color: #61A60D;
+  }
+
+  .is-hidden {
+    display: none;
   }
 
 </style>
