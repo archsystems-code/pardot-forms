@@ -1,0 +1,185 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.3/ofi.min.js"></script>
+  <script>
+    function toggleInputSelect(e) {
+      e.preventDefault();
+      $(".title").removeClass("shimmer");
+      var $input = $($(e.currentTarget).parent().parent().children()[0]);
+      var $select = $($(e.currentTarget).parent().children()[1]);
+      $input.prop("checked", !$input.prop("checked"))
+      $input.prop("checked") ? $select.removeClass("is-hidden") : $select.addClass("is-hidden");
+      $(e.currentTarget).parent().parent().css("background-color", $input.prop("checked") ? "#61A60D" : "white")
+      $(e.currentTarget).text($input.prop("checked") ? "REMOVE" : "SELECT")
+      $(e.currentTarget).css("background-color", $input.prop("checked") ? "white" : "#61A60D")
+      $(e.currentTarget).css("color", $input.prop("checked") ? "#61A60D" : "white")
+    }
+    function submitRequest(e) {
+      e.preventDefault();
+      var firstName = $("#67312_153643pi_67312_153643").val();
+      var lastName = $("#67312_153645pi_67312_153645").val();
+      var email = $("#67312_153647pi_67312_153647").val();
+      var andazBinder = $("#67312_153641pi_67312_153641_1255901");
+      var crescentBinder = $("#67312_153641pi_67312_153641_1255903");
+      var stonehengeBinder = $("#67312_153641pi_67312_153641_1255905");
+      var formBinder = $("#67312_153641pi_67312_153641_1255907");
+      var skuQuantity = $(".quantity input");
+      if (firstName.length === 0) {
+        $("#67312_153643pi_67312_153643").css("background", "#DD4E75");
+        return false;
+      }
+      if (lastName.length === 0) {
+        $("#67312_153645pi_67312_153645").css("background", "#DD4E75");
+        return false;
+      }
+      if (email.length === 0) {
+        $("#67312_153647pi_67312_153647").css("background", "#DD4E75");
+        return false;
+      }
+      var goodToGo = false;
+      $("input[type='checkbox']").each(function(i, el) {
+        if ($(el).prop("checked")) {
+          goodToGo = true;
+        }
+      })
+      if (!goodToGo) {
+        $(".title").addClass("shimmer")
+        return false;
+      }
+      var skuQuantityInput = "";
+      if (andazBinder.prop("checked")) {
+        var quantity = $("." + andazBinder.prop("id")).val();
+        skuQuantityInput += quantity + " | ";
+      }
+      if (crescentBinder.prop("checked")) {
+        var quantity = $("." + crescentBinder.prop("id")).val();
+        skuQuantityInput += quantity + " | "
+      }
+      if (stonehengeBinder.prop("checked")) {
+        var quantity = $("." + stonehengeBinder.prop("id")).val();
+        skuQuantityInput += quantity + " | "
+      }
+      if (formBinder.prop("checked")) {
+        var quantity = $("." + formBinder.prop("id")).val();
+        skuQuantityInput += quantity
+      }
+      skuQuantity.val(skuQuantityInput);
+      var theData = $(this).serialize();
+      var request = $.post("https://www2.archsystems.com/l/67312/2018-09-18/bklpb8", theData);
+      request.done(function(response){
+        document.open();
+        document.write(response);
+        document.close();
+      })
+    }
+    var head = document.head;
+    var meta = document.createElement("meta");
+    meta.name = "viewport";
+    meta.content = "width=device-width, initial-scale=1";
+    head.appendChild(meta);
+    var body = document.getElementsByTagName('body')[0];
+    var form = document.getElementsByTagName('form')[0];
+    var newNode = document.createElement("div");
+    var newHtml = '<p><a href="https://archsystems.com"><img alt="" border="0" src="https://www2.archsystems.com/l/67312/2018-07-23/bjgx6z/67312/186011/ASI_Logo_Color_SM.png" style="width: 50%; height: auto; border-width: 0px; border-style: solid;margin: 0 auto; display: flex; max-width: 900px;" /></a></p><p class="title">Select Resource</p>'
+    newNode.innerHTML = newHtml;
+    body.insertBefore(newNode, form);
+    var andazBinderImage = document.createElement("img");
+    var crescentBinderImage = document.createElement("img");
+    var stonehengeBinderImage = document.createElement("img");
+    var formBinderImage = document.createElement("img");
+    andazBinderImage.src = "https://www2.archsystems.com/l/67312/2018-09-18/bklpbd/67312/190197/Andaz_Product_Binder_image_min.JPG";
+    andazBinderImage.classList.add("poster")
+    crescentBinderImage.src = "https://www2.archsystems.com/l/67312/2018-09-18/bklpdz/67312/190199/Crescent_Porcelain_min.JPG";
+    crescentBinderImage.classList.add("poster")
+    stonehengeBinderImage.src = "https://www2.archsystems.com/l/67312/2018-09-18/bklpbg/67312/190195/Stonehenge_ProductBinder_min.JPG";
+    stonehengeBinderImage.classList.add("poster")
+    formBinderImage.src = "https://www2.archsystems.com/l/67312/2018-09-18/bklpdx/67312/190201/FORM_Concrete_Porcelain_Binder_min.jpg";
+    formBinderImage.classList.add("poster")
+    $(".value").children().each(function(i, el){
+      $(el).addClass("resource");
+      var quanitityInput = document.createElement("select");
+      quanitityInput.classList.add($(el).children()[0].name);
+      quanitityInput.classList.add("is-hidden");
+      var selectButton = document.createElement("button");
+      selectButton.textContent = "SELECT";
+      selectButton.type = "button";
+      $(selectButton).on("click", toggleInputSelect);
+      if ($($(el).children()[0]).prop("checked")) {
+        $(el).css("background-color", "#61A60D");
+        $(selectButton).css("background-color", "white");
+        $(selectButton).css("color", "#61A60D");
+        $(selectButton).text("REMOVE");
+        $(quanitityInput).removeClass("is-hidden");
+      } else {
+        $(el).css("background-color", "white");
+        $(selectButton).css("background-color", "#61A60D");
+        $(selectButton).css("color", "white");
+        $(selectButton).text("SELECT");
+        $(quanitityInput).addClass("is-hidden");
+      }
+      if (i === 0) {
+        var selectionsContainer = document.createElement("div");
+        selectionsContainer.classList.add("selection-container");
+        [...Array(6).keys()].forEach(function(el) {
+          if (el > 0) {
+            var option = document.createElement("option");
+            option.value = el;
+            option.textContent = el;
+            quanitityInput.appendChild(option);
+          }
+        })
+        selectionsContainer.appendChild(selectButton)
+        selectionsContainer.appendChild(quanitityInput)
+        el.appendChild(andazBinderImage);
+        el.appendChild(selectionsContainer);
+      } else if (i === 1) {
+        var selectionsContainer = document.createElement("div");
+        selectionsContainer.classList.add("selection-container");
+        [...Array(6).keys()].forEach(function(el) {
+          if (el > 0) {
+            var option = document.createElement("option");
+            option.value = el;
+            option.textContent = el;
+            quanitityInput.appendChild(option);
+          }
+        })
+        selectionsContainer.appendChild(selectButton)
+        selectionsContainer.appendChild(quanitityInput)
+        el.appendChild(crescentBinderImage);
+        el.appendChild(selectionsContainer);
+      } else if (i === 2) {
+        var selectionsContainer = document.createElement("div");
+        selectionsContainer.classList.add("selection-container");
+        [...Array(6).keys()].forEach(function(el) {
+          if (el > 0) {
+            var option = document.createElement("option");
+            option.value = el;
+            option.textContent = el;
+            quanitityInput.appendChild(option);
+          }
+        })
+        selectionsContainer.appendChild(selectButton)
+        selectionsContainer.appendChild(quanitityInput)
+        el.appendChild(stonehengeBinderImage);
+        el.appendChild(selectionsContainer);
+      } else if (i === 3 ) {
+        var selectionsContainer = document.createElement("div");
+        selectionsContainer.classList.add("selection-container");
+        [...Array(6).keys()].forEach(function(el) {
+          if (el > 0) {
+            var option = document.createElement("option");
+            option.value = el;
+            option.textContent = el;
+            quanitityInput.appendChild(option);
+          }
+        })
+        selectionsContainer.appendChild(selectButton)
+        selectionsContainer.appendChild(quanitityInput)
+        el.appendChild(formBinderImage);
+        el.appendChild(selectionsContainer);
+      }
+    })
+    form.addEventListener("submit", submitRequest, false);
+    $(document).ready(function(){
+      objectFitImages();
+    })
+  </script>

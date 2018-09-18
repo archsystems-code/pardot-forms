@@ -1,0 +1,24 @@
+<style type="text/css">@import url('https://fonts.googleapis.com/css?family=Encode+Sans|Hind+Siliguri|Montserrat:200,400');
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    font-family: 'Encode Sans', sans-serif;
+  }
+
+  p {
+    font-size: 18px;
+  }
+</style>
+<p>We received your request and will get your resources to you right away!</p>
+<script>
+  var body = document.getElementsByTagName('body')[0];
+  var form = document.getElementsByTagName('form')[0];
+  var newNode = document.createElement("div");
+  var newHtml = '<p><a href="https://archsystems.com"><img alt="" border="0" src="https://www2.archsystems.com/l/67312/2018-07-23/bjgx6z/67312/186011/ASI_Logo_Color_SM.png" style="width: 50%; height: auto; border-width: 0px; border-style: solid;margin: 0 auto; display: flex;" /></a></p>'
+  newNode.innerHTML = newHtml;
+  body.insertBefore(newNode, form)
+</script>
