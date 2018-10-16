@@ -1,4 +1,4 @@
-<p><a href="https://archsystems.com"><img alt="" border="0" src="http://www2.archsystems.com/l/67312/2018-02-13/bc3bf5/67312/173058/footer.jpg" style="width: 100%; height: auto; border-width: 0px; border-style: solid;" /></a> <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script> <script src="http://www2.archsystems.com/l/67312/2018-01-18/bbf6h3/67312/171294/dropzone.js"></script> <script src="http://www2.archsystems.com/l/67312/2018-01-19/bbffwf/67312/171344/progressbar.min.js"></script> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es6"></script> <script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script> <script>
+<p><a href="https://archsystems.com"><img alt="" border="0" src="https://www2.archsystems.com/l/67312/2018-02-13/bc3bf5/67312/173058/footer.jpg" style="width: 100%; height: auto; border-width: 0px; border-style: solid;" /></a> <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script> <script src="https://www2.archsystems.com/l/67312/2018-01-18/bbf6h3/67312/171294/dropzone.js"></script> <script src="https://www2.archsystems.com/l/67312/2018-01-19/bbffwf/67312/171344/progressbar.min.js"></script> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es6"></script> <script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script> <script>
   "use strict";
 
   (function () {
@@ -13,7 +13,7 @@
 
     window.CustomEvent = CustomEvent;
   })();
-  
+
 
   function handleProjectClick() {
     window.open($(this).data().link, "_blank");
@@ -54,7 +54,7 @@
       return false;
     }
     var theData = $(this).serialize();
-    $.post("http://www2.archsystems.com/l/67312/2018-01-18/bbd5my", theData);
+    $.post("https://www2.archsystems.com/l/67312/2018-01-18/bbd5my", theData);
     var ACCESS_TOKEN = "E2kOOrj3PAoAAAAAAAAV3iglJznk6_o8_PNYC16bHyIWLXCrPQxQXZLB-Nt7SfcJ";
     var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
     var bar = new ProgressBar.Line("#container", {
@@ -180,11 +180,11 @@
   var dropzoneLink = document.createElement("link");
   dropzoneLink.type = "text/css";
   dropzoneLink.rel = "stylesheet";
-  dropzoneLink.href = "http://www2.archsystems.com/l/67312/2018-01-18/bbf6xw/67312/171300/dropzone.css";
+  dropzoneLink.href = "https://www2.archsystems.com/l/67312/2018-01-18/bbf6xw/67312/171300/dropzone.css";
   var customLink = document.createElement("link");
   customLink.type = "text/css";
   customLink.rel = "stylesheet";
-  customLink.href = "http://www2.archsystems.com/l/67312/2018-01-23/bbh9r7/67312/171630/main.css";
+  customLink.href = "https://www2.archsystems.com/l/67312/2018-01-23/bbh9r7/67312/171630/main.css";
   head.appendChild(dropzoneLink);
   head.appendChild(customLink);
   $("head").append('<meta name="viewport" content="width=device-width, initial-scale=1">');
@@ -209,7 +209,7 @@
   authorization.appendChild(authorizationCheckbox);
   authorization.appendChild(authorizationLabel);
   Dropzone.options.fileUpload = {
-    url: "http://www2.archsystems.com/l/67312/2018-01-18/bbd5my",
+    url: "https://www2.archsystems.com/l/67312/2018-01-18/bbd5my",
     dictDefaultMessage: "Drop Photos or Videos Here"
   };
   document.getElementsByClassName("submit")[0].insertAdjacentElement('beforebegin', newDropZoneItem);
