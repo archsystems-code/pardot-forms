@@ -1,0 +1,12 @@
+<script>
+'use-strict';
+if (document.getElementsByClassName("error").length) {
+  document.getElementsByTagName("form")[0].style.overflow = "scroll";
+}
+var date = document.getElementsByClassName("date");
+var placeholderDateOption = date[0].children[1].firstChild;
+var time = document.getElementsByClassName("time");
+var placeholderTimeOption = time[0].children[1].firstChild;
+placeholderDateOption.innerText = "Select Day";
+placeholderTimeOption.innerText = "Select Time";
+</script>
