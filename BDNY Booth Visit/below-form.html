@@ -9,4 +9,11 @@ var time = document.getElementsByClassName("time");
 var placeholderTimeOption = time[0].children[1].firstChild;
 placeholderDateOption.innerText = "Select Day";
 placeholderTimeOption.innerText = "Select Time";
+
+var footer = document.createElement("footer");
+var footerP = document.createElement("p");
+var body = document.getElementsByTagName("body");
+footerP.innerText = "Architectural Systems returns again to BDNY with new iconic product collections for immersive hospitality design!";
+footer.appendChild(footerP);
+body[0].appendChild(footer);
 </script>
