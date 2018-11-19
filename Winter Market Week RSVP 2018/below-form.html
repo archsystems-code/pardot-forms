@@ -1,0 +1,46 @@
+<script>
+  'use-strict';
+  var imageContainter = document.createElement("div");
+  var logo = document.createElement("img");
+  var marketWeekImg = document.createElement("img");
+  var designRetailLogo = document.createElement("img");
+  var presents = document.createElement("h2");
+  var title = document.createElement("h1");
+  var subHeading = document.createElement("h2");
+  var description = document.createElement("p");
+  var whenDiv = document.createElement("div");
+  var whenDivOne = document.createElement("div");
+  var whenDivTwo = document.createElement("div");
+  var whenDivThree = document.createElement("div");
+  description.classList.add("description");
+  description.textContent = "Come and join us in our 5,000 sq. ft. showroom during New York Market Week as Nancy Jackson, President of Architectural Systems Inc. showcases projects in branded environments that create memorable places";
+  whenDiv.classList.add("when-container");
+  whenDivOne.classList.add("when-box");
+  whenDivOne.classList.add("has-border");
+  whenDivOne.innerHTML = "<h3>Dec</h3><h3>04</h3>";
+  whenDivTwo.classList.add("when-box");
+  whenDivTwo.classList.add("has-border");
+  whenDivTwo.innerHTML = "<h3>Tues</h3><h3>Day</h3>";
+  whenDivThree.classList.add("when-box");
+  whenDivThree.innerHTML = "<h3>1:30</h3><h3>PM</h3>";
+  whenDiv.insertAdjacentElement("afterbegin", whenDivThree)
+  whenDiv.insertAdjacentElement("afterbegin", whenDivTwo)
+  whenDiv.insertAdjacentElement("afterbegin", whenDivOne)
+  title.textContent = "THE POWER OF MATERIALS®";
+  presents.textContent = "PRESENTS";
+  subHeading.textContent = "CREATING NARRATIVE STORYTELLING THROUGH SURFACING SELECTIONS";
+  logo.src = "https://www2.archsystems.com/l/67312/2018-11-19/bm9jdn/67312/194879/ASI_Logo_Color_Smaller_Bolder_White.png";
+  marketWeekImg.src = "https://www2.archsystems.com/l/67312/2018-11-19/bm9hv6/67312/194869/market_week_2018.jpg";
+  designRetailLogo.src = "https://www2.archsystems.com/l/67312/2018-11-19/bm9jss/67312/194891/design_retail_png.png";
+  logo.classList.add("asi-logo");
+  imageContainter.classList.add("images-container");
+  imageContainter.insertAdjacentElement("afterbegin", designRetailLogo);
+  imageContainter.insertAdjacentElement("afterbegin", marketWeekImg);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", description);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", whenDiv);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", subHeading);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", title);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", presents);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", imageContainter);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", logo);
+</script>
