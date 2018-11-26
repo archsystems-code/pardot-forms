@@ -1,9 +1,12 @@
 <script>
   'use-strict';
   var imageContainter = document.createElement("div");
+  var logoImagesContainter = document.createElement("div");
   var logo = document.createElement("img");
   var marketWeekImg = document.createElement("img");
   var designRetailLogo = document.createElement("img");
+  var idcecLogo = document.createElement("img");
+  var aiaLogo = document.createElement("img");
   var presents = document.createElement("h2");
   var title = document.createElement("h1");
   var subHeading = document.createElement("h2");
@@ -32,12 +35,22 @@
   logo.src = "https://www2.archsystems.com/l/67312/2018-11-19/bm9jdn/67312/194879/ASI_Logo_Color_Smaller_Bolder_White.png";
   marketWeekImg.src = "https://www2.archsystems.com/l/67312/2018-11-19/bm9hv6/67312/194869/market_week_2018.jpg";
   designRetailLogo.src = "https://www2.archsystems.com/l/67312/2018-11-19/bm9jss/67312/194891/design_retail_png.png";
+  idcecLogo.src = "https://www.archsystems.com/Global/HomePage/idcec.jpg";
+  aiaLogo.src = "https://www.archsystems.com/Global/HomePage/aia.jpg";
   logo.classList.add("asi-logo");
   imageContainter.classList.add("images-container");
+  logoImagesContainter.classList.add("images-container");
+  idcecLogo.style.width = "100px";
+  idcecLogo.style.margin = "2.5px";
+  aiaLogo.style.height = "55px";
+  aiaLogo.style.width = "auto";
+  aiaLogo.style.margin = "2.5px";
+  logoImagesContainter.insertAdjacentElement("afterbegin", aiaLogo);logoImagesContainter.insertAdjacentElement("afterbegin", idcecLogo);
   imageContainter.insertAdjacentElement("afterbegin", designRetailLogo);
   imageContainter.insertAdjacentElement("afterbegin", marketWeekImg);
   document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", description);
   document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", whenDiv);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", logoImagesContainter);
   document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", subHeading);
   document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", title);
   document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", presents);
