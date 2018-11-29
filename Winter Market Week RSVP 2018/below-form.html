@@ -11,12 +11,15 @@
   var title = document.createElement("h1");
   var subHeading = document.createElement("h2");
   var description = document.createElement("p");
+  var description2 = document.createElement("p");
   var whenDiv = document.createElement("div");
   var whenDivOne = document.createElement("div");
   var whenDivTwo = document.createElement("div");
   var whenDivThree = document.createElement("div");
   description.classList.add("description");
+  description2.classList.add("description");
   description.textContent = "Come and join us in our 5,000 sq. ft. showroom during New York Market Week as Nancy Jackson, President of Architectural Systems Inc. showcases projects in branded environments that create memorable places";
+  description2.innerHTML = "<strong style='line-height: 150%'>Showroom Address</strong><br>150 West 25th Street <br>8th Floor<br>New York, NY 10001";
   whenDiv.classList.add("when-container");
   whenDivOne.classList.add("when-box");
   whenDivOne.classList.add("has-border");
@@ -48,6 +51,7 @@
   logoImagesContainter.insertAdjacentElement("afterbegin", aiaLogo);logoImagesContainter.insertAdjacentElement("afterbegin", idcecLogo);
   imageContainter.insertAdjacentElement("afterbegin", designRetailLogo);
   imageContainter.insertAdjacentElement("afterbegin", marketWeekImg);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", description2);
   document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", description);
   document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", whenDiv);
   document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", logoImagesContainter);
