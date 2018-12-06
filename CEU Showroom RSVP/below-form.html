@@ -1,0 +1,56 @@
+<script>
+  'use-strict';
+  var logoImagesContainter = document.createElement("div");
+  var logo = document.createElement("img");
+  var marketWeekImg = document.createElement("img");
+  var designRetailLogo = document.createElement("img");
+  var idcecLogo = document.createElement("img");
+  var aiaLogo = document.createElement("img");
+  var presents = document.createElement("h2");
+  var title = document.createElement("h1");
+  var subHeading = document.createElement("h2");
+  var description = document.createElement("p");
+  var description2 = document.createElement("p");
+  var whenDiv = document.createElement("div");
+  var whenDivOne = document.createElement("div");
+  var whenDivTwo = document.createElement("div");
+  var whenDivThree = document.createElement("div");
+  description.classList.add("description");
+  description2.classList.add("description");
+  description.textContent = "Come and join us in our 5,000 sq. ft. showroom during New York Market Week as Nancy Jackson, President of Architectural Systems Inc. showcases projects in branded environments that create memorable places";
+  description2.innerHTML = "<strong style='line-height: 150%'>Showroom Address</strong><br>150 West 25th Street <br>8th Floor<br>New York, NY 10001";
+  whenDiv.classList.add("when-container");
+  whenDivOne.classList.add("when-box");
+  whenDivOne.classList.add("has-border");
+  whenDivOne.innerHTML = "<h3>Jan</h3><h3>24</h3>";
+  whenDivTwo.classList.add("when-box");
+  whenDivTwo.classList.add("has-border");
+  whenDivTwo.innerHTML = "<h3>Thurs</h3><h3>Day</h3>";
+  whenDivThree.classList.add("when-box");
+  whenDivThree.innerHTML = "<h3>1:30</h3><h3>PM</h3>";
+  whenDiv.insertAdjacentElement("afterbegin", whenDivThree)
+  whenDiv.insertAdjacentElement("afterbegin", whenDivTwo)
+  whenDiv.insertAdjacentElement("afterbegin", whenDivOne)
+  title.textContent = "THE POWER OF MATERIALS®";
+  presents.textContent = "PRESENTS";
+  subHeading.textContent = "CREATING NARRATIVE STORYTELLING THROUGH SURFACING SELECTIONS";
+  logo.src = "https://www2.archsystems.com/l/67312/2018-11-19/bm9jdn/67312/194879/ASI_Logo_Color_Smaller_Bolder_White.png";
+  idcecLogo.src = "https://www.archsystems.com/Global/HomePage/idcec.jpg";
+  aiaLogo.src = "https://www.archsystems.com/Global/HomePage/aia.jpg";
+  logo.classList.add("asi-logo");
+  logoImagesContainter.classList.add("images-container");
+  idcecLogo.style.width = "100px";
+  idcecLogo.style.margin = "2.5px";
+  aiaLogo.style.height = "55px";
+  aiaLogo.style.width = "auto";
+  aiaLogo.style.margin = "2.5px";
+  logoImagesContainter.insertAdjacentElement("afterbegin", aiaLogo);logoImagesContainter.insertAdjacentElement("afterbegin", idcecLogo);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", description2);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", description);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", whenDiv);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", logoImagesContainter);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", subHeading);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", title);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", presents);
+  document.getElementsByTagName("body")[0].insertAdjacentElement("afterbegin", logo);
+</script>
